@@ -1,19 +1,20 @@
-#from _typeshed import Self
-from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.boxlayout import BoxLayout 
-from kivy.uix.image import Image
 import os
-import random
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.logger import WHITE
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button  import Button
+from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
+from kivy.uix.image import Image
+from kivy.lang import Builder
+from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.widget import Widget
 
 
-class MyGrid(GridLayout):
-    screen_manager= ScreenManager()
+class MainPage(GridLayout):
     def __init__(self, **kwargs):
-        super(MyGrid, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
         self.rows = 1
         self.padding=[36,16]
@@ -25,311 +26,310 @@ class MyGrid(GridLayout):
         self.inside.padding=[36,16]
         self.inside.rows=5
 
-        self.inside.button1 = Button(text="burger", font_size=15,
-                              color=(1, 1, 1, 1), background_color=(1, 0, 0, 1))
+        self.inside.button1 = Button(text="burger", font_size=15, color=(1, 1, 1, 1), background_color=(1, 0, 0, 1))
         self.inside.button1.bind(on_press=self.pressed1)
         self.inside.add_widget(self.inside.button1)
 
-        self.inside.button2 = Button(text="set", font_size=15,
-                              color=(1, 1, 1, 1), background_color=(1, 1, 0, 1))
+        self.inside.button2 = Button(text="set", font_size=15, color=(1, 1, 1, 1), background_color=(1, 1, 0, 1))
         self.inside.button2.bind(on_press=self.pressed2)
         self.inside.add_widget(self.inside.button2)
 
-        self.inside.button3 = Button(text="drink", font_size=15,
-                              color=(1, 1, 1, 1), background_color=(0, 1, 0, 1))
-        self.inside.button3.bind(on_press=self.pressed3)
+        self.inside.button3 = Button(text="drink", font_size=15, color=(1, 1, 1, 1), background_color=(0, 1, 0, 1))
+        self.inside.button3.bind(on_press=self.pressed6)
         self.inside.add_widget(self.inside.button3)
 
-        self.inside.button4 = Button(text="etc", font_size=15,
-                              color=(1, 1, 1, 1), background_color=(0, 1, 1, 1))
-        self.inside.button4.bind(on_press=self.pressed4)
+        self.inside.button4 = Button(text="ect", font_size=15, color=(1, 1, 1, 1), background_color=(0, 1, 1, 1))
+        self.inside.button4.bind(on_press=self.pressed7)
         self.inside.add_widget(self.inside.button4)
+
 
         self.add_widget(self.inside)
 
     def pressed1(self, instance):
-        sm = ScreenManager()
-        sm.current = "burgerpage"
+    #    self.screen_manager = ScreenManager()
+        app.screen_manager.current = "BurgerDetailPage"
 
-    #def pressed2(self, instance):
-    #    sm = ScreenManager()
-    #    sm.current = "setpage"
+    def pressed2(self, instance):
+        app.screen_manager.current = "SetDetailPage"
 
-    #def pressed3(self, instance):
-    #    sm = ScreenManager()
-    #    sm.current = "drinkpage"
+    def pressed3(self, instance):
+        app.screen_manager.current = "BuyPage"
 
-    #def pressed4(self, instance):
-    #    sm = ScreenManager()
-    #    sm.current = "etcpage"
+    def pressed4(self, instance):
+        app.screen_manager.current = "MainPage"
 
+    def pressed5(self, instance):
+        app.screen_manager.current = "CompletePage"
+    def pressed6(self, instance):
+        app.screen_manager.current = "DrinkPage"
+    def pressed7(self, instance):
+        app.screen_manager.current = "EtcPage"
 
-class BurgerPage(GridLayout):
-    screen_manager= ScreenManager()
+class BurgerDetailPage(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.cols = 1
-        # menu_result=menu()
-        self.inside2 = GridLayout()
-        self.inside2.cols = 2
 
-        # self.inside.add_widget(Label(text="plz".format(menu_result), font_size=15))
-
-
-
-
+        self.rows = 1
         self.padding=[36,16]
-        self.img = Image(source="bigmac.png")
-        self.add_widget(self.img)
+        # self.img = Image(source="bigmac.png")
+        # self.add_widget(self.img)
 
-        self.button2_1 = Button(text="good", background_normal = 'normal.png',font_size=15, color=(0, 0, 0, 1), background_color=(0.4, 1, 0.2, 1))
-        self.button2_1.bind(on_press=self.pressed1)
-        self.inside2.add_widget(self.button2_1)
+        self.inside=BoxLayout()
+        self.inside.orientation='vertical'
+        self.inside.padding=[36,16]
+        self.inside.rows=5
 
+        self.inside.button1 = Button(font_size=15,
+                              color=(1, 1, 1, 1), background_color=(1, 1, 1, 1), background_normal = 'bigmac.png')
+        self.inside.button1.bind(on_press=self.pressed3)
+        self.inside.add_widget(self.inside.button1)
 
-        self.inside.button2 = Image("set1.png")
-        self.inside.button2.bind(on_press=self.pressed1)
+        self.inside.button2 = Button(font_size=15,
+                              color=(1, 1, 1, 1), background_color=(1, 1, 1, 1), background_normal = 'shanghi.png')
+        self.inside.button2.bind(on_press=self.pressed3)
         self.inside.add_widget(self.inside.button2)
 
-        self.inside = GridLayout()
-        self.inside.cols = 1
-
-        self.add_widget((self.inside))
-
-    # def do_action(self):
-    #     self.menu_result=menu()
+        self.add_widget(self.inside)
 
 
+    def pressed3(self, instance):
+        app.screen_manager.current = "BuyPage"
 
-    def pressed1(self, instance):
-        sm = ScreenManager()
-        sm.current="creditpage"
+class SetDetailPage(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
-    #def pressed2(self, instance):
-        #MyApp.screen_manager.current = "/"
+        self.rows = 1
+        self.padding=[36,16]
+        # self.img = Image(source="bigmac.png")
+        # self.add_widget(self.img)
 
+        self.inside=BoxLayout()
+        self.inside.orientation='vertical'
+        self.inside.padding=[36,16]
+        self.inside.rows=5
 
-class MyApp(App):
-    def build(self):
-        return MyGrid()
+        self.inside.button1 = Button(font_size=15,
+                              color=(1, 1, 1, 1), background_color=(1, 1, 1, 1), background_normal = 'set1.png')
+        self.inside.button1.bind(on_press=self.pressed3)
+        self.inside.add_widget(self.inside.button1)
 
-# class MyApp1(App):
-#     def build(self):
-#         return bugerpage()
+        self.inside.button2 = Button(font_size=15,
+                              color=(1, 1, 1, 1), background_color=(1, 1, 1, 1), background_normal = 'shanghiset.png')
+        self.inside.button2.bind(on_press=self.pressed3)
+        self.inside.add_widget(self.inside.button2)
 
-class EpicApp(App):
-    def build(self):
-        self.screen_manager= ScreenManager()
-
-        self.connect_page=BurgerPage()
-        screen=Screen(name="bugerpage")
-        screen.add_widget(self.connect_page)
-        self.screen_manager.add_widget(screen)
-
-        # self.info_page=InfoPage()
-        # screen = Screen(name="InfoPage")
-        # screen.add_widget(self.info_page)
-        # self.screen_manager.add_widget(screen)
-
-        # self.end_page=EndPage()
-        # screen = Screen(name="EndPage")
-        # screen.add_widget(self.end_page)
-        # self.screen_manager.add_widget(screen)
-
-        return self.screen_manager
+        self.add_widget(self.inside)
 
 
+    def pressed3(self, instance):
+        app.screen_manager.current = "BuyPage"
 
-if __name__ == "__main__":
-    MyApp=EpicApp()
-    MyApp.run()
 
-# class bugerpage(GridLayout):
-#     screen_manager= ScreenManager()
+# class SetDetailPage(GridLayout):
 #     def __init__(self, **kwargs):
 #         super().__init__(**kwargs)
-#         self.cols = 1
 
-#         self.inside2 = GridLayout()
-#         self.inside2.cols = 2
-
+#         self.rows = 1
 #         self.padding=[36,16]
-#         self.img = Image(source="bigmac.png")
+#         self.img = Image(source="set1.png")
 #         self.add_widget(self.img)
 
-#         self.button2_1 = Button(text="good", background_normal = 'normal.png',font_size=15, color=(0, 0, 0, 1), background_color=(0.4, 1, 0.2, 1))
-#         self.button2_1.bind(on_press=self.pressed1)
-#         self.inside2.add_widget(self.button2_1)
+#         self.inside=BoxLayout()
+#         self.inside.orientation='vertical'
+#         self.inside.padding=[36,16]
+#         self.inside.rows=5
 
+#         self.inside.button1 = Button(text="buy", font_size=15,
+#                               color=(1, 1, 1, 1), background_color=(1, 0, 0, 1))
+#         self.inside.button1.bind(on_press=self.pressed1)
+#         self.inside.add_widget(self.inside.button1)
 
-#         self.inside.button2 = Image("set1.png")
+#         self.inside.button2 = Button(text="back", font_size=15,
+#                               color=(1, 1, 1, 1), background_color=(1, 1, 0, 1))
 #         self.inside.button2.bind(on_press=self.pressed1)
 #         self.inside.add_widget(self.inside.button2)
-
-#         self.inside = GridLayout()
-#         self.inside.cols = 1
-
-#         self.add_widget((self.inside))
-
-
-#     def pressed1(self, instance):
-#         sm = ScreenManager()
-#         sm.current="creditpage"
-
-#     def pressed2(self, instance):
-#         MyApp.screen_manager.current = "/"
-
-#     def build(self):
-#         self.screen_manager= ScreenManager()
-
-#         self.connect_page=bugerpage()
-#         screen=Screen(name="bugerpage")
-#         screen.add_widget(self.connect_page)
-#         self.screen_manager.add_widget(screen)
-
-#         return self.screen_manager
-
-# class setpage(GridLayout):
-#     screen_manager= ScreenManager()
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
-#         self.cols = 1
-
-
-#         self.inside.button2 = Image("set1.png")
-#         self.inside.button2.bind(on_press=self.pressed1)
-#         self.inside.add_widget(self.inside.button2)
-
-
-#         self.inside = GridLayout()
-#         self.inside.cols = 1
-
-#         self.add_widget((self.inside))
-
-
-#     def pressed1(self, instance):
-#         MyApp.screen_manager.current="creditpage"
-
-# class drinkpage(GridLayout):
-#     screen_manager= ScreenManager()
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
-#         self.cols = 1
-
-
-#         self.inside.button2 = Image("coke.png")
-#         self.inside.button2.bind(on_press=self.pressed1)
-#         self.inside.add_widget(self.inside.button2)
-#         #self.add_widget(self.img)
-
-
-#         self.inside = GridLayout()
-#         self.inside.cols = 1
-
-#         self.add_widget((self.inside))
-
-# class etcpage(GridLayout):
-#     screen_manager= ScreenManager()
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
-#         self.cols = 1
-
-#         self.inside.button2 = Image("etc1.png")
-#         self.inside.button2.bind(on_press=self.pressed1)
-#         self.inside.add_widget(self.inside.button2)
-#         #self.add_widget(self.img)    
-
-#         self.inside = GridLayout()
-#         self.inside.cols = 1
-
-#         self.add_widget((self.inside))
-
-
-#     def pressed1(self, instance):
-#         MyApp.screen_manager.current="creditpage"
-
-# class creditpage(GridLayout):
-#     screen_manager= ScreenManager()
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
-#         self.cols = 1
-
-#         self.inside = GridLayout()
-#         self.inside.cols = 1
-
-#         self.inside.button4 = Button(text="credit", font_size=15,
-#                               color=(1, 1, 1, 1), background_color=(0, 1, 1, 1))
-#         self.inside.button4.bind(on_press=self.pressed1)
-#         self.inside.add_widget(self.inside.button4)
-
-#         self.inside.button4 = Button(text="cash", font_size=15,
-#                               color=(1, 1, 1, 1), background_color=(0, 1, 1, 1))
-#         self.inside.button4.bind(on_press=self.pressed1)
-#         self.inside.add_widget(self.inside.button4)
 
 #         self.add_widget(self.inside)
 
+
 #     def pressed1(self, instance):
-#         MyApp.screen_manager.current="finalpage"
+#         app.screen_manager.current = "pageapp"
 
-# class finalpage(GridLayout):
-#     screen_manager= ScreenManager()
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
-#         self.cols = 1
-#         self.inside = GridLayout()
-#         self.inside.cols = 1
-#         self.inside.button4 = Button(text="completion", font_size=15,
-#                               color=(1, 1, 1, 1), background_color=(0, 1, 1, 1))
-#         self.inside.button4.bind(on_press=self.pressed1)
-#         self.inside.add_widget(self.inside.button4)
-    
-#     def pressed1(self, instance):
-#         MyApp.screen_manager.current="MyGrid"
+class DrinkPage(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.rows = 1
+        self.padding=[36,16]
+        # self.img = Image(source="coke.png")
+        # self.add_widget(self.img)
+
+        self.inside=BoxLayout()
+        self.inside.orientation='vertical'
+        self.inside.padding=[36,16]
+        self.inside.rows=5
+
+        self.inside.button1 = Button(font_size=15,
+                              color=(1, 1, 1, 1), background_color=(1, 1, 1, 1), background_normal = 'coke.png')
+        self.inside.button1.bind(on_press=self.pressed3)
+        self.inside.add_widget(self.inside.button1)
+
+        self.inside.button2 = Button(font_size=15,
+                              color=(1, 1, 1, 1), background_color=(1, 1, 1, 1), background_normal = 'sprite.png')
+        self.inside.button2.bind(on_press=self.pressed3)
+        self.inside.add_widget(self.inside.button2)
+
+        self.add_widget(self.inside)
 
 
-#         self.add_widget((self.inside))
+    def pressed3(self, instance):
+        app.screen_manager.current = "BuyPage"
+
+class EtcPage(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.rows = 1
+        self.padding=[36,16]
+        # self.img = Image(source="bigmac.png")
+        # self.add_widget(self.img)
+
+        self.inside=BoxLayout()
+        self.inside.orientation='vertical'
+        self.inside.padding=[36,16]
+        self.inside.rows=5
+
+        self.inside.button1 = Button(font_size=15,
+                              color=(1, 1, 1, 1), background_color=(1, 1, 1, 1), background_normal = 'etc1.png')
+        self.inside.button1.bind(on_press=self.pressed3)
+        self.inside.add_widget(self.inside.button1)
+
+        self.inside.button2 = Button(font_size=15,
+                              color=(1, 1, 1, 1), background_color=(1, 1, 1, 1), background_normal = 'macnugget.png')
+        self.inside.button2.bind(on_press=self.pressed3)
+        self.inside.add_widget(self.inside.button2)
+
+        self.add_widget(self.inside)
 
 
-# class EpicApp(App):
+    def pressed3(self, instance):
+        app.screen_manager.current = "BuyPage"
+
+
+
+class BuyPage(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.rows = 1
+        self.padding=[36,16]
+        # self.img = Image(source="logo.png")
+        # self.add_widget(self.img)
+
+        self.inside=BoxLayout()
+        self.inside.orientation='vertical'
+        self.inside.padding=[36,16]
+        self.inside.rows=5
+
+        self.inside.button1 = Button(text="buy", font_size=15, color=(1, 1, 1, 1), background_color=(1, 0, 0, 1))
+        self.inside.button1.bind(on_press=self.pressed5)
+        self.inside.add_widget(self.inside.button1)
+
+        self.inside.button2 = Button(text="back", font_size=15, color=(1, 1, 1, 1), background_color=(1, 1, 0, 1))
+        self.inside.button2.bind(on_press=self.pressed4)
+        self.inside.add_widget(self.inside.button2)
+
+        self.add_widget(self.inside)
+
+    def pressed5(self, instance):
+        app.screen_manager.current = "CompletePage"
+
+
+    def pressed4(self, instance):
+        app.screen_manager.current = "MainPage"
+
+    # def pressed4(self, instance):
+    #     app.screen_manager.current = "pageapp"
+
+class CompletePage(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.rows = 1
+        self.padding=[36,16]
+        self.img = Image(source="logo.png")
+        self.add_widget(self.img)
+
+        self.inside=BoxLayout()
+        self.inside.orientation='vertical'
+        self.inside.padding=[36,16]
+        self.inside.rows=5
+
+        self.inside.button1 = Button(text="go main", font_size=15, color=(1, 1, 1, 1), background_color=(1, 0, 0, 1))
+        self.inside.button1.bind(on_press=self.pressed4)
+        self.inside.add_widget(self.inside.button1)
+
+
+        self.add_widget(self.inside)
+
+    def pressed4(self, instance):
+    #    self.screen_manager = ScreenManager()
+        app.screen_manager.current = "MainPage"
+
+
+class PageApp(App):
+    def build(self):
+
+        self.screen_manager= ScreenManager()
+
+        self.main_page=MainPage()
+        screen = Screen(name="MainPage")
+        screen.add_widget(self.main_page)
+        self.screen_manager.add_widget(screen)
+
+        self.bugerdetail_page=BurgerDetailPage()
+        screen = Screen(name="BurgerDetailPage")
+        screen.add_widget(self.bugerdetail_page)
+        self.screen_manager.add_widget(screen)
+
+        self.setdetail_page=SetDetailPage()
+        screen = Screen(name="SetDetailPage")
+        screen.add_widget(self.setdetail_page)
+        self.screen_manager.add_widget(screen)
+
+        self.buy_page=BuyPage()
+        screen = Screen(name="BuyPage")
+        screen.add_widget(self.buy_page)
+        self.screen_manager.add_widget(screen)
+
+        self.drink_page=DrinkPage()
+        screen = Screen(name="DrinkPage")
+        screen.add_widget(self.drink_page)
+        self.screen_manager.add_widget(screen)
+
+        self.complete_page=CompletePage()
+        screen = Screen(name="CompletePage")
+        screen.add_widget(self.complete_page)
+        self.screen_manager.add_widget(screen)
+
+        self.complete_page=EtcPage()
+        screen = Screen(name="EtcPage")
+        screen.add_widget(self.complete_page)
+        self.screen_manager.add_widget(screen)
+
+        return self.screen_manager
+
+# class AwesomeApp(App):
 #     def build(self):
-#         self.screen_manager= ScreenManager()
+#         return MyLayout()
 
-#         self.connect_page=bugerpage()
-#         screen=Screen(name="bugerpage")
-#         screen.add_widget(self.connect_page)
-#         self.screen_manager.add_widget(screen)
+# class MyApp(App):
+#     def build(self):
+#         return mainpage()
 
-        # self.info_page=setpage()
-        # screen = Screen(name="setpage")
-        # screen.add_widget(self.info_page)
-        # self.screen_manager.add_widget(screen)
-
-        # self.end_page=drinkpage()
-        # screen = Screen(name="drinkpage")
-        # screen.add_widget(self.end_page)
-        # self.screen_manager.add_widget(screen)
-
-        # self.end_page=etcpage()
-        # screen = Screen(name="etcpage")
-        # screen.add_widget(self.end_page)
-        # self.screen_manager.add_widget(screen)
-
-#         self.end_page=creditpage()
-#         screen = Screen(name="creditpage")
-#         screen.add_widget(self.end_page)
-#         self.screen_manager.add_widget(screen)
-
-#         self.end_page=finalpage()
-#         screen = Screen(name="finalpage")
-#         screen.add_widget(self.end_page)
-#         self.screen_manager.add_widget(screen)
-
-#         return self.screen_manager
-
-# if __name__ == "__main__":
-#     EpicApp().run()
-
-#if __name__ == "__main__":
-#   MyApp=EpicApp()
-#    MyApp.run()
+if __name__=='__main__':
+    #MyApp=PageApp()
+    app=PageApp()
+    app.run()
+    #PageApp().run()
